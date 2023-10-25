@@ -4,10 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>9286a27b-f680-4ab7-a79b-7cd1b44e45b3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankApi.Core\BankApp.Core.csproj" />
+    <ProjectReference Include="..\BankApi.Infrastructure\BankApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

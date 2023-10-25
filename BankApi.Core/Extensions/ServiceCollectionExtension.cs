@@ -1,7 +1,11 @@
-﻿namespace BankApp.Core.Extensions;
+﻿using BankApp.Core.Middleware;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace BankApp.Core.Extensions;
 public static class ServiceCollectionExtension
 {
-    public static void AddDomain(this IServiceCollection services)
+    public static void AddCore(this IServiceCollection services)
     {
         services.AddMediatR(options =>
         {
