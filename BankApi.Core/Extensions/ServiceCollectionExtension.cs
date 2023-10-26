@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace BankApp.Core.Extensions;
 public static class ServiceCollectionExtension
 {
@@ -14,5 +15,6 @@ public static class ServiceCollectionExtension
         });
 
         services.AddValidatorsFromAssemblyContaining(typeof(ServiceCollectionExtension), includeInternalTypes: true);
+
     }
 }

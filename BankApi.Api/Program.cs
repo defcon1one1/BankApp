@@ -2,9 +2,9 @@ using BankApp.Core.Extensions;
 using BankApp.Infrastructure.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder();
+
 builder.Services.AddCore();
 builder.Services.AddInfrastructure(builder.Configuration);
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
