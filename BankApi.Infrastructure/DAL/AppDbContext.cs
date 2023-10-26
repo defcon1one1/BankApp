@@ -1,4 +1,4 @@
-﻿using BankApp.Infrastructure.Entities;
+﻿using BankApp.Infrastructure.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

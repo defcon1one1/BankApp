@@ -1,13 +1,17 @@
-var builder = WebApplication.CreateBuilder(args);
+using BankApp.Core.Extensions;
+using BankApp.Infrastructure.Extensions;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder();
+builder.Services.AddCore();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

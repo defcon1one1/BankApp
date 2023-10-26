@@ -1,6 +1,6 @@
 ﻿using BankApp.Core.Repositories;
 using BankApp.Infrastructure.DAL;
-using BankApp.Infrastructure.Repositories;
+using BankApp.Infrastructure.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +11,7 @@ public static class ServiceCollectionExtension
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-        services.AddScoped<ICustomerRepository, CustomerRepository>(); // Replace with the actual implementation
+            options.UseSqlServer(configuration.GetConnectionString("Default")));
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
     }
-
 }
