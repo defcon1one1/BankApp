@@ -1,3 +1,4 @@
+using BankApp.Api.Middleware;
 using BankApp.Core.Extensions;
 using BankApp.Infrastructure.Extensions;
 
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

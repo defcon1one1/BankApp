@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace BankApp.Core.Middleware;
@@ -18,9 +19,9 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         CancellationToken cancellationToken)
 
     {
-        var context = new ValidationContext<TRequest>(request);
+        ValidationContext<TRequest> context = new(request);
 
-        var failures = _validators
+        List<ValidationFailure> failures = _validators
             .ToAsyncEnumerable()
             .SelectAwait(async validator => await validator.ValidateAsync(context))
             .ToEnumerable()
@@ -35,5 +36,4 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         return await next();
     }
-
 }

@@ -7,4 +7,5 @@ internal class DepositCommandHandlerValidator : AbstractValidator<DepositCommand
     {
         RuleFor(c => c.Amount).GreaterThan(0).WithMessage("Amount must be greater than 0.");
     }
+
 }
