@@ -1,23 +1,24 @@
-﻿using BankApp.Core.Models;
+﻿using BankApp.Core.Dtos;
+using BankApp.Core.Models;
 using BankApp.Core.Repositories;
 using MediatR;
 
 namespace BankApp.Core.Customers.Queries.GetBalanceQuery;
-public record GetBalanceQuery(Guid Id) : IRequest<decimal>;
-internal class GetBalanceQueryHandler : IRequestHandler<GetBalanceQuery, decimal>
+public record GetCustomerByIdQuery(Guid Id) : IRequest<CustomerDto>;
+internal class GetBalanceQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerDto>
 {
     private readonly ICustomerRepository _customerRepository;
     public GetBalanceQueryHandler(ICustomerRepository customerRepository)
     {
         _customerRepository = customerRepository;
     }
-    public async Task<decimal> Handle(GetBalanceQuery request, CancellationToken cancellationToken)
+    public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
         Customer? customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
         if (customer is not null)
         {
-            return customer.Balance;
+            return Customer.ToDto(customer);
         }
-        return default;
+        return null;
     }
 }

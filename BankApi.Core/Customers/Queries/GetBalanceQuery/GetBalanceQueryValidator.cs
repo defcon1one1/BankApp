@@ -2,7 +2,7 @@
 using FluentValidation;
 
 namespace BankApp.Core.Customers.Queries.GetBalanceQuery;
-internal class GetBalanceQueryValidator : AbstractValidator<GetBalanceQuery>
+internal class GetBalanceQueryValidator : AbstractValidator<GetCustomerByIdQuery>
 {
     private readonly ICustomerRepository _customerRepository;
     public GetBalanceQueryValidator(ICustomerRepository customerRepository)
