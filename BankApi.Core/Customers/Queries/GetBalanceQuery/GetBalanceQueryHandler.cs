@@ -12,6 +12,7 @@ internal class GetBalanceQueryHandler : IRequestHandler<GetCustomerByIdQuery, Cu
     {
         _customerRepository = customerRepository;
     }
+
     public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
         Customer? customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
@@ -19,6 +20,6 @@ internal class GetBalanceQueryHandler : IRequestHandler<GetCustomerByIdQuery, Cu
         {
             return Customer.ToDto(customer);
         }
-        return null;
+        return default!;
     }
 }
