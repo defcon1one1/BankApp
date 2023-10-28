@@ -1,0 +1,117 @@
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\Program.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\Controllers\CustomersController.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\Middleware\ExceptionHandlingMiddleware.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\BankApi.Api.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\BankApi.Api.GlobalUsings.g.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\BankApp.Api.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\BankApp.Api.GlobalUsings.g.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Api\obj\Debug\net6.0\BankApp.Api.MvcApplicationPartsAssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Commands\DepositCommand\DepositCommandHandler.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Commands\DepositCommand\DepositCommandHandlerValidator.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Commands\WithdrawCommand\WithdrawCommandHandler.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Commands\WithdrawCommand\WithdrawCommandHandlerValidator.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Queries\GetBalanceQuery\GetBalanceQueryHandler.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Customers\Queries\GetBalanceQuery\GetBalanceQueryValidator.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Dtos\CustomerDto.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Extensions\ServiceCollectionExtension.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Models\Customer.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\obj\Debug\net6.0\BankApi.Core.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\obj\Debug\net6.0\BankApi.Core.GlobalUsings.g.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\obj\Debug\net6.0\BankApp.Core.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\obj\Debug\net6.0\BankApp.Core.GlobalUsings.g.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Repositories\ICustomerRepository.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Core\Shared\ValidationBehavior.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\DAL\AppDbContext.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\DAL\Configurations\CustomerConfiguration.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\DAL\Entities\CustomerEntity.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\DAL\Repositories\CustomerRepository.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\Exceptions\DatabaseOperationException.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\Extensions\ServiceCollectionExtension.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\Migrations\20231026164142_Init.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\Migrations\20231026164142_Init.Designer.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\Migrations\AppDbContextModelSnapshot.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\obj\Debug\net6.0\BankApi.Infrastructure.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\obj\Debug\net6.0\BankApi.Infrastructure.GlobalUsings.g.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\obj\Debug\net6.0\BankApp.Infrastructure.AssemblyInfo.cs
+--------------------------------------------------
+
+File: C:\Users\Jan\source\repos\BankApi\BankApi.Infrastructure\obj\Debug\net6.0\BankApp.Infrastructure.GlobalUsings.g.cs
+--------------------------------------------------
+

@@ -13,5 +13,6 @@ public static class ServiceCollectionExtension
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IEventRepository, EventRepository>();
     }
 }

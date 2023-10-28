@@ -7,6 +7,8 @@ public class CustomerEntity
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public decimal Balance { get; set; }
+    public string? Username { get; set; } // only used for simulating logging in
+    public string? PasswordHash { get; set; } // only used for simulating logging in
 
     public Customer ToCustomer()
     {

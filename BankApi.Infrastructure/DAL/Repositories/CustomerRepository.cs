@@ -1,4 +1,5 @@
-﻿using BankApp.Core.Models;
+﻿using BankApp.Core.Customers.Commands.LoginCommand;
+using BankApp.Core.Models;
 using BankApp.Core.Repositories;
 using BankApp.Infrastructure.DAL.Entities;
 using BankApp.Infrastructure.Exceptions;
@@ -12,7 +13,7 @@ public class CustomerRepository : ICustomerRepository
     {
         _dbContext = dbContext;
     }
-    public async Task<Customer?> GetCustomerById(Guid id, CancellationToken cancellationToken)
+    public async Task<Customer?> GetById(Guid id, CancellationToken cancellationToken)
     {
         CustomerEntity? customerEntity = await _dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         if (customerEntity is not null)
@@ -61,6 +62,22 @@ public class CustomerRepository : ICustomerRepository
             {
                 throw new DatabaseOperationException("Deduct from balance operation failed.", ex);
             }
+        }
+        return false;
+    }
+
+    public async Task<Customer?> GetByUsername(string username)
+    {
+        CustomerEntity? customerEntity = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Username == username);
+        return customerEntity?.ToCustomer();
+    }
+
+    public async Task<bool> VerifyLogin(LoginRequest loginRequest)
+    {
+        CustomerEntity? customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Username == loginRequest.Username);
+        if (customer is not null)
+        {
+            return customer.Username == loginRequest.Username && customer.PasswordHash == loginRequest.PasswordHash;
         }
         return false;
     }

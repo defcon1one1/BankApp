@@ -1,4 +1,5 @@
-﻿using BankApp.Core.Models;
+﻿using BankApp.Core.Customers.Events;
+using BankApp.Core.Models;
 using BankApp.Core.Repositories;
 using MediatR;
 
@@ -8,19 +9,34 @@ public record DepositCommand(Guid Id, decimal Amount) : IRequest<bool> { }
 public class DepositCommandHandler : IRequestHandler<DepositCommand, bool>
 {
     private readonly ICustomerRepository _customerRepository;
-    public DepositCommandHandler(ICustomerRepository customerRepository)
+    private readonly IEventRepository _eventRepository;
+
+    public DepositCommandHandler(ICustomerRepository customerRepository, IEventRepository eventRepository)
     {
         _customerRepository = customerRepository;
+        _eventRepository = eventRepository;
     }
 
     public async Task<bool> Handle(DepositCommand request, CancellationToken cancellationToken)
     {
-        Customer? customer = await _customerRepository.GetCustomerById(request.Id, CancellationToken.None);
-        if (customer is not null)
+        IEnumerable<IEvent> events = await _eventRepository.GetAllByAggregateId(request.Id);
+
+        Customer customer = Customer.LoadFromEvents(request.Id, events);
+        customer.Deposit(request.Amount);
+
+        FundsDepositedEvent? depositEvent = customer.GetPendingEvents().OfType<FundsDepositedEvent>().FirstOrDefault();
+
+        if (depositEvent is not null)
         {
-            await _customerRepository.AddToBalance(request.Id, request.Amount);
-            return true;
+            await _eventRepository.Add(depositEvent);
+            customer.ClearPendingEvents();
+
+            if (await _customerRepository.AddToBalance(request.Id, request.Amount))
+            {
+                return true;
+            }
         }
+
         return false;
     }
 }

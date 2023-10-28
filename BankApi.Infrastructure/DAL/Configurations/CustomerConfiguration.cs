@@ -7,8 +7,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<CustomerEntity>
 {
     public void Configure(EntityTypeBuilder<CustomerEntity> builder)
     {
-        builder.Property(b => b.FirstName).IsRequired();
-        builder.Property(b => b.LastName).IsRequired();
-        builder.Property(b => b.Balance).HasColumnType("money");
+        builder.Property(e => e.Id).ValueGeneratedNever();
+        builder.Property(e => e.FirstName).IsRequired();
+        builder.Property(e => e.LastName).IsRequired();
+        builder.Property(e => e.Balance).HasColumnType("money");
     }
 }

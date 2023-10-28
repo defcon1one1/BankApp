@@ -1,13 +1,16 @@
 ﻿using BankApp.Core.Customers.Commands.DepositCommand;
+using BankApp.Core.Customers.Commands.LoginCommand;
 using BankApp.Core.Customers.Commands.WithdrawCommand;
 using BankApp.Core.Customers.Queries.GetBalanceQuery;
 using BankApp.Core.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankApp.Api.Controllers;
-[Route("api/customers/{id}")]
+[Route("api/customer/{id}")]
 [ApiController]
+[Authorize]
 public class CustomersController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -15,6 +18,20 @@ public class CustomersController : ControllerBase
     {
         _mediator = mediator;
     }
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+    {
+        LoginResponse response = await _mediator.Send(new LoginCommand(loginRequest));
+
+        if (response.Token is not null)
+        {
+            return Ok(new { response.Token });
+        }
+
+        return Unauthorized();
+    }
+
     [HttpGet("balance")]
     public async Task<IActionResult> GetBalance([FromRoute] Guid id, CancellationToken cancellationToken)
     {
@@ -33,4 +50,5 @@ public class CustomersController : ControllerBase
         bool result = await _mediator.Send(new WithdrawCommand(id, amount), CancellationToken.None);
         return result ? NoContent() : BadRequest();
     }
+
 }

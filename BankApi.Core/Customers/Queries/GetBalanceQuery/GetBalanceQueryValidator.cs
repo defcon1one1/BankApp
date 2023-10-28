@@ -13,5 +13,4 @@ internal class GetBalanceQueryValidator : AbstractValidator<GetCustomerByIdQuery
             .MustAsync(async (id, cancellationToken) => await _customerRepository.CustomerExists(id))
             .WithMessage("Customer with this ID does not exist.");
     }
-
 }

@@ -1,12 +1,15 @@
-﻿using BankApp.Core.Dtos;
+﻿using BankApp.Core.Customers.Events;
 
 namespace BankApp.Core.Models;
+
 public class Customer
 {
-    public Guid Id { get; set; }
-    public string FirstName { get; private set; } = string.Empty;
-    public string LastName { get; private set; } = string.Empty;
+    public Guid Id { get; private set; }
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
     public decimal Balance { get; private set; }
+
+    private readonly List<IEvent> pendingEvents = new();
 
     public Customer(Guid id, string firstName, string lastName, decimal balance)
     {
@@ -16,13 +19,54 @@ public class Customer
         Balance = balance;
     }
 
-    public static Customer Create(Guid id, string firstName, string lastName, decimal balance)
+    public void Deposit(decimal amount)
     {
-        return new Customer(id, firstName, lastName, balance);
+        if (amount <= 0)
+            throw new InvalidOperationException("Deposit amount must be positive.");
+
+        Apply(new FundsDepositedEvent { AggregateId = Id, CustomerId = Id, Amount = amount });
     }
 
-    public static CustomerDto ToDto(Customer customer)
+    public void Withdraw(decimal amount)
     {
-        return new CustomerDto() { Id = customer.Id, FullName = $"{customer.FirstName} {customer.LastName}", Balance = customer.Balance };
+        if (amount <= 0)
+            throw new InvalidOperationException("Withdrawal amount must be positive.");
+
+        Apply(new FundsWithdrawnEvent { AggregateId = Id, Amount = amount });
+    }
+
+    private void Apply(IEvent @event)
+    {
+        switch (@event)
+        {
+            case FundsDepositedEvent e:
+                Balance += e.Amount;
+                break;
+            case FundsWithdrawnEvent e:
+                Balance -= e.Amount;
+                break;
+        }
+        pendingEvents.Add(@event);
+    }
+
+    public IEnumerable<IEvent> GetPendingEvents()
+    {
+        return pendingEvents.AsReadOnly();
+    }
+
+    public void ClearPendingEvents()
+    {
+        pendingEvents.Clear();
+    }
+
+    public static Customer LoadFromEvents(Guid customerId, IEnumerable<IEvent> events)
+    {
+        Customer customer = new(customerId, "", "", 0);
+        foreach (var @event in events)
+        {
+            customer.Apply(@event);
+        }
+        customer.ClearPendingEvents();
+        return customer;
     }
 }

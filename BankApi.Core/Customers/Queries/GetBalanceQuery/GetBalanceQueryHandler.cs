@@ -15,10 +15,10 @@ internal class GetBalanceQueryHandler : IRequestHandler<GetCustomerByIdQuery, Cu
 
     public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        Customer? customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
+        Customer? customer = await _customerRepository.GetById(request.Id, cancellationToken);
         if (customer is not null)
         {
-            return Customer.ToDto(customer);
+            return CustomerDto.FromCustomer(customer);
         }
         return default!;
     }

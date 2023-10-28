@@ -1,8 +1,7 @@
-﻿using BankApp.Core.Customers.Commands.WithdrawCommand;
-using BankApp.Core.Models;
+﻿using BankApp.Core.Models;
 using BankApp.Core.Repositories;
 using FluentValidation;
-
+namespace BankApp.Core.Customers.Commands.WithdrawCommand;
 internal class WithdrawCommandHandlerValidator : AbstractValidator<WithdrawCommand>
 {
     private readonly ICustomerRepository _customerRepository;
@@ -26,8 +25,7 @@ internal class WithdrawCommandHandlerValidator : AbstractValidator<WithdrawComma
 
     private async Task<bool> ValidateWithdrawalAmount(WithdrawCommand command)
     {
-        // The customer cannot be null because its existence is validated prior to the amount validation.
-        Customer? customer = await _customerRepository.GetCustomerById(command.Id, CancellationToken.None);
-        return command.Amount <= customer.Balance;
+        Customer? customer = await _customerRepository.GetById(command.Id, CancellationToken.None);
+        return customer is not null && command.Amount <= customer.Balance;
     }
 }
