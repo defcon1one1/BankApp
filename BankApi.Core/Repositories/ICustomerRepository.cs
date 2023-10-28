@@ -1,5 +1,4 @@
-﻿using BankApp.Core.Customers.Commands.LoginCommand;
-using BankApp.Core.Models;
+﻿using BankApp.Core.Models;
 
 namespace BankApp.Core.Repositories;
 public interface ICustomerRepository
@@ -9,5 +8,5 @@ public interface ICustomerRepository
     Task<bool> DeductFromBalance(Guid id, decimal amount);
     Task<bool> CustomerExists(Guid id);
     Task<Customer?> GetByUsername(string username);
-    Task<bool> VerifyLogin(LoginRequest loginRequest);
+    Task<bool> VerifyLogin(string username, string passwordHash);
 }

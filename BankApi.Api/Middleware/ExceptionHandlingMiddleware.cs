@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using System.Text.Json;
 
-namespace BankApp.Api.Middleware;
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
@@ -23,23 +22,25 @@ public class ExceptionHandlingMiddleware
             context.Response.ContentType = "application/json";
             IEnumerable<string> errorMessages = ex.Errors.Select(error => error.ErrorMessage);
 
-
             string jsonResponse = JsonSerializer.Serialize(new
             {
                 Errors = errorMessages
             });
             await context.Response.WriteAsync(jsonResponse);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Response.ContentType = "application/json";
 
-
-            string jsonResponse = JsonSerializer.Serialize(new
+            // Serialize the exception to a format you desire
+            var exceptionInfo = new
             {
                 Message = "An error occurred while processing your request.",
-            });
+                ex
+            };
+
+            string jsonResponse = JsonSerializer.Serialize(exceptionInfo);
             await context.Response.WriteAsync(jsonResponse);
         }
     }

@@ -1,5 +1,4 @@
-﻿using BankApp.Core.Customers.Commands.LoginCommand;
-using BankApp.Core.Models;
+﻿using BankApp.Core.Models;
 using BankApp.Core.Repositories;
 using BankApp.Infrastructure.DAL.Entities;
 using BankApp.Infrastructure.Exceptions;
@@ -72,12 +71,12 @@ public class CustomerRepository : ICustomerRepository
         return customerEntity?.ToCustomer();
     }
 
-    public async Task<bool> VerifyLogin(LoginRequest loginRequest)
+    public async Task<bool> VerifyLogin(string username, string passwordHash)
     {
-        CustomerEntity? customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Username == loginRequest.Username);
+        CustomerEntity? customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Username == username);
         if (customer is not null)
         {
-            return customer.Username == loginRequest.Username && customer.PasswordHash == loginRequest.PasswordHash;
+            return customer.Username == username && customer.PasswordHash == passwordHash;
         }
         return false;
     }
