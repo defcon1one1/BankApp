@@ -24,18 +24,14 @@ public class CustomersController : ControllerBase
     {
         LoginResponse response = await _mediator.Send(new LoginCommand(loginRequest));
 
-        if (response.Token is not null)
-        {
-            return Ok(new { response.Token });
-        }
-        return Unauthorized();
+        return response.Success ? Ok(response) : Unauthorized();
     }
 
     [HttpGet("{id}/balance")]
     public async Task<IActionResult> GetBalance([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        CustomerDto customer = await _mediator.Send(new GetCustomerByIdQuery(id), cancellationToken);
-        return customer is null ? NotFound() : Ok(customer);
+        CustomerDto customerDto = await _mediator.Send(new GetCustomerByIdQuery(id), cancellationToken);
+        return customerDto is null ? NotFound() : Ok(customerDto);
     }
     [HttpPatch("{id}/deposit")]
     public async Task<IActionResult> Deposit([FromRoute] Guid id, [FromBody] decimal amount)

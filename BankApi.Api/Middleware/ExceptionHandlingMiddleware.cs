@@ -28,16 +28,14 @@ public class ExceptionHandlingMiddleware
             });
             await context.Response.WriteAsync(jsonResponse);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Response.ContentType = "application/json";
 
-            // Serialize the exception to a format you desire
             var exceptionInfo = new
             {
-                Message = "An error occurred while processing your request.",
-                ex
+                Message = "An error occurred while processing your request."
             };
 
             string jsonResponse = JsonSerializer.Serialize(exceptionInfo);
