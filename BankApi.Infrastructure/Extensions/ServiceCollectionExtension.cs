@@ -1,6 +1,7 @@
 ﻿using BankApp.Core.Repositories;
 using BankApp.Infrastructure.DAL;
 using BankApp.Infrastructure.DAL.Repositories;
+using BankApp.Infrastructure.DAL.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,5 +15,6 @@ public static class ServiceCollectionExtension
             options.UseSqlServer(configuration.GetConnectionString("Default")));
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
     }
 }

@@ -46,4 +46,12 @@ public class CustomersController : ControllerBase
         return result ? NoContent() : BadRequest();
     }
 
+    [AllowAnonymous]
+    [HttpGet("notifications")]
+    public IActionResult GetNotificationsPage()
+    {
+        var htmlContent = System.IO.File.ReadAllText("notifications.html");
+        return Content(htmlContent, "text/html");
+    }
+
 }

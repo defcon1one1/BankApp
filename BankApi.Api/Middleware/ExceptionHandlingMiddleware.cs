@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using System.Text.Json;
 
+namespace BankApp.Api.Middleware;
+
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

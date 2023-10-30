@@ -38,5 +38,6 @@ public static class ServiceCollectionExtension
             };
         });
 
+        services.AddSignalR();
     }
 }
