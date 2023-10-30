@@ -2,9 +2,9 @@
 
 ## How to run 
   1. Change "ConnectionString:Default" in `appsettings.json` value to your valid connection string and ports in `./Properties/launchSettings.json`
-  2. Database should be initiated in `DatabaseSeeder.cs` with default two Customers with usernames: "johnsmith" and "janedoe" with passwords "pass123" for both.
+  2. Database should be initiated in `DatabaseSeeder.cs` with default two Customers with usernames: `johnsmith` and `janedoe` with passwords `pass123` for both.
 ## Actions
-  `POST api/customer/` - in order to login `LoginRequest` in the body is needed: 
+  `POST api/customer/` - in order to login `LoginRequest` object in the request body is needed: 
   ```
   {
     "username": "johnsmith",
@@ -19,6 +19,7 @@
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg2NDkxMzAsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6ImxvY2FsaG9zdCJ9.7QSHPn0CVyJpUDhnCxjZ5gAQgWX6uCyiRCT0M6ZX9TA"
   }
   ```
+  
   `GET api/customer/{id}/balance` - checks balance
   `PATCH api/customer/{id}/deposit` - deposits funds, request body requires plain, positive decimal value
   `PATCH api/customer/{id}/withdraw` - withdraws fuunds, request body requires plain, positive decimal value and cannot exceed the customer's current balance
