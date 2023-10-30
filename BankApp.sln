@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankApp.Api", "BankApp.Api\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankApp.Core", "BankApp.Core\BankApp.Core.csproj", "{A0A31528-421D-41E0-8835-71132B82E5CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankApp.Infrastructure", "BankApi.Infrastructure\BankApp.Infrastructure.csproj", "{5B56ACF3-22AE-4C2C-895F-3F10F916D068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankApp.Infrastructure", "BankApp.Infrastructure\BankApp.Infrastructure.csproj", "{5B56ACF3-22AE-4C2C-895F-3F10F916D068}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankApp.Tests", "BankApp.Tests\BankApp.Tests.csproj", "{6FA56845-C625-4B79-A3B3-BD892F58B0CB}"
 EndProject

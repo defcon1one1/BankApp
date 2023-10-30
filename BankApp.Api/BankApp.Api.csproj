@@ -16,8 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankApi.Core\BankApp.Core.csproj" />
-    <ProjectReference Include="..\BankApi.Infrastructure\BankApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\BankApp.Core\BankApp.Core.csproj" />
+    <ProjectReference Include="..\BankApp.Infrastructure\BankApp.Infrastructure.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include ="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>BankApp.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 </Project>

@@ -26,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankApi.Api\BankApp.Api.csproj" />
-    <ProjectReference Include="..\BankApi.Core\BankApp.Core.csproj" />
-    <ProjectReference Include="..\BankApi.Infrastructure\BankApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\BankApp.Api\BankApp.Api.csproj" />
+    <ProjectReference Include="..\BankApp.Core\BankApp.Core.csproj" />
+    <ProjectReference Include="..\BankApp.Infrastructure\BankApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
