@@ -22,8 +22,9 @@ public static class ServiceCollectionExtension
 
         services.AddValidatorsFromAssemblyContaining(typeof(ServiceCollectionExtension), includeInternalTypes: true);
 
-        services.AddScoped<JwtService>();
-        services.AddScoped<PasswordService>();
+        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IPasswordService, PasswordService>();
+        services.AddScoped<INotificationService, NotificationService>();
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

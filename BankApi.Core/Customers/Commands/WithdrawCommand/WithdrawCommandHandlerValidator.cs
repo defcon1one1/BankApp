@@ -12,7 +12,7 @@ internal class WithdrawCommandHandlerValidator : AbstractValidator<WithdrawComma
         _customerRepository = customerRepository;
 
         RuleFor(c => c.Id)
-            .MustAsync(async (id, cancellationToken) => await _customerRepository.CustomerExists(id))
+            .MustAsync(async (id, cancellationToken) => await _customerRepository.CustomerExistsAsync(id))
             .WithMessage("Customer with this ID does not exist.")
             .DependentRules(() =>
             {
@@ -29,7 +29,7 @@ internal class WithdrawCommandHandlerValidator : AbstractValidator<WithdrawComma
 
     private async Task<bool> ValidateWithdrawalAmount(WithdrawCommand command)
     {
-        Customer? customer = await _customerRepository.GetById(command.Id, CancellationToken.None);
+        Customer? customer = await _customerRepository.GetByIdAsync(command.Id, CancellationToken.None);
         return customer is not null && command.Amount <= customer.Balance;
     }
 

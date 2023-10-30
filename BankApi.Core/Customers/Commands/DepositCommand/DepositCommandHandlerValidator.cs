@@ -10,7 +10,7 @@ internal class DepositCommandHandlerValidator : AbstractValidator<DepositCommand
         _customerRepository = customerRepository;
 
         RuleFor(c => c.Id)
-            .MustAsync(async (id, cancellationToken) => await _customerRepository.CustomerExists(id))
+            .MustAsync(async (id, cancellationToken) => await _customerRepository.CustomerExistsAsync(id))
             .WithMessage("Customer with this ID does not exist.")
             .DependentRules(() =>
             {

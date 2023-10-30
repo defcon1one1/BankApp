@@ -23,7 +23,6 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
         LoginResponse response = await _mediator.Send(new LoginCommand(loginRequest));
-
         return response.Success ? Ok(response) : Unauthorized();
     }
 
@@ -50,7 +49,7 @@ public class CustomersController : ControllerBase
     [HttpGet("notifications")]
     public IActionResult GetNotificationsPage()
     {
-        var htmlContent = System.IO.File.ReadAllText("notifications.html");
+        string htmlContent = System.IO.File.ReadAllText("notifications.html");
         return Content(htmlContent, "text/html");
     }
 

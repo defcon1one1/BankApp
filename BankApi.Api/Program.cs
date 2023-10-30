@@ -1,6 +1,6 @@
 using BankApp.Api.Middleware;
 using BankApp.Core.Extensions;
-using BankApp.Core.Notifications;
+using BankApp.Core.Hubs;
 using BankApp.Infrastructure.DAL.Seeders;
 using BankApp.Infrastructure.Extensions;
 

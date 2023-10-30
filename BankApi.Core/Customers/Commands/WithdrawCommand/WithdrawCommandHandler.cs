@@ -1,9 +1,7 @@
 ﻿using BankApp.Core.Customers.Events;
 using BankApp.Core.Models;
-using BankApp.Core.Notifications;
 using BankApp.Core.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 
 namespace BankApp.Core.Customers.Commands.WithdrawCommand;
 
@@ -12,12 +10,12 @@ internal class WithdrawCommandHandler : IRequestHandler<WithdrawCommand, bool>
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IEventRepository _eventRepository;
-    private readonly IHubContext<NotificationHub> _hubContext;
-    public WithdrawCommandHandler(ICustomerRepository customerRepository, IEventRepository eventRepository, IHubContext<NotificationHub> hubContext)
+    private readonly INotificationService _notificationService;
+    public WithdrawCommandHandler(ICustomerRepository customerRepository, IEventRepository eventRepository, INotificationService notificationService)
     {
         _customerRepository = customerRepository;
         _eventRepository = eventRepository;
-        _hubContext = hubContext;
+        _notificationService = notificationService;
     }
 
     public async Task<bool> Handle(WithdrawCommand request, CancellationToken cancellationToken)
@@ -26,17 +24,26 @@ internal class WithdrawCommandHandler : IRequestHandler<WithdrawCommand, bool>
 
         Customer customer = Customer.LoadFromEvents(request.Id, events);
 
-        customer.Withdraw(request.Amount);
-        var withdrawalEvent = customer.GetPendingEvents().OfType<FundsWithdrawnEvent>().FirstOrDefault();
-
-        if (withdrawalEvent != null)
+        if (customer.Balance == customer.Balance - request.Amount) // the action will not proceed if another operation was made during handling the request
         {
-            await _eventRepository.Add(withdrawalEvent);
-            customer.ClearPendingEvents();
-            if (await _customerRepository.DeductFromBalance(request.Id, request.Amount))
+            return false;
+        }
+
+        bool result = customer.Withdraw(request.Amount);
+
+        if (result)
+        {
+            FundsWithdrawnEvent? withdrawalEvent = customer.GetPendingEvents().OfType<FundsWithdrawnEvent>().FirstOrDefault();
+
+            if (withdrawalEvent != null)
             {
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", $"{DateTime.UtcNow} UTC: user {customer.Id} has made a withdrawal of {request.Amount}", cancellationToken: cancellationToken);
-                return true;
+                await _eventRepository.Add(withdrawalEvent);
+                customer.ClearPendingEvents();
+                if (await _customerRepository.DeductFromBalanceAsync(request.Id, request.Amount))
+                {
+                    await _notificationService.SendOperationNotification($"{DateTime.UtcNow} UTC: user {customer.Id} withdrawn {request.Amount}");
+                    return true;
+                }
             }
         }
 

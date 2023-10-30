@@ -1,6 +1,6 @@
 ﻿using BankApp.Core.Dtos;
+using BankApp.Core.Hubs;
 using BankApp.Core.Models;
-using BankApp.Core.Notifications;
 using BankApp.Core.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
@@ -19,7 +19,7 @@ internal class GetBalanceQueryHandler : IRequestHandler<GetCustomerByIdQuery, Cu
 
     public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        Customer? customer = await _customerRepository.GetById(request.Id, cancellationToken);
+        Customer? customer = await _customerRepository.GetByIdAsync(request.Id, cancellationToken);
         if (customer is not null)
         {
             await _hubContext.Clients.All.SendAsync("ReceiveNotification", $"{DateTime.UtcNow} UTC: user {customer.Id} has checked balance", cancellationToken: cancellationToken);

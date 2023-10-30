@@ -19,20 +19,25 @@ public class Customer
         Balance = balance;
     }
 
-    public void Deposit(decimal amount)
+    public bool Deposit(decimal amount)
     {
-        if (amount <= 0)
-            throw new InvalidOperationException("Deposit amount must be positive.");
-
-        Apply(new FundsDepositedEvent { AggregateId = Id, CustomerId = Id, Amount = amount });
+        if (amount >= 0 && decimal.TryParse(amount.ToString(), out _))
+        {
+            Apply(new FundsDepositedEvent { AggregateId = Id, CustomerId = Id, Amount = amount });
+            return true;
+        }
+        return false;
     }
 
-    public void Withdraw(decimal amount)
+    public bool Withdraw(decimal amount)
     {
-        if (amount <= 0)
-            throw new InvalidOperationException("Withdrawal amount must be positive.");
 
-        Apply(new FundsWithdrawnEvent { AggregateId = Id, Amount = amount });
+        if (amount >= 0 && decimal.TryParse(amount.ToString(), out _))
+        {
+            Apply(new FundsWithdrawnEvent { AggregateId = Id, Amount = amount });
+            return true;
+        }
+        return false;
     }
 
     private void Apply(IEvent @event)

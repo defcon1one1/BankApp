@@ -4,7 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace BankApp.Core.Services;
-public class JwtService
+
+public interface IJwtService
+{
+    string GenerateJwtToken();
+}
+
+public class JwtService : IJwtService
 {
     private readonly IConfiguration _configuration;
     public JwtService(IConfiguration configuration)
