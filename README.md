@@ -21,6 +21,9 @@
   ```
   
   `GET api/customer/{id}/balance` - checks balance
+  
   `PATCH api/customer/{id}/deposit` - deposits funds, request body requires plain, positive decimal value
+  
   `PATCH api/customer/{id}/withdraw` - withdraws fuunds, request body requires plain, positive decimal value and cannot exceed the customer's current balance
+  
   In order to receive real-time notifications you can access it via url `https://localhost:7098/api/customer/notifications`
