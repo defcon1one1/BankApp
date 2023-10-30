@@ -26,4 +26,4 @@
   
   `PATCH api/customer/{id}/withdraw` - withdraws fuunds, request body requires plain, positive decimal value and cannot exceed the customer's current balance
   
-  In order to receive real-time notifications you can access it via url `https://localhost:7098/api/customer/notifications`
+  Real-time notifications using SignalR is simulated by simple `notifications.html` site accessed via `https://localhost:7098/api/customer/notifications`
